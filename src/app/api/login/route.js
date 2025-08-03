@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabaseClient";
+import jwt from "jsonwebtoken";;
 
 export async function POST(request) {
     try {
@@ -10,7 +11,17 @@ export async function POST(request) {
         if (error) {
             return new Response(JSON.stringify({ error: 'User not found', details: error.message }), { status: 400});
         }
-        return new Response(JSON.stringify({ success: true, user: data }), { status: 200 });
+
+        const token = jwt.sign(
+            {id: data.id, email: data.email},
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' } 
+        );
+        return new Response(JSON.stringify(
+            { success: true, user: data, token: token }
+            ), 
+        { status: 200 }
+    );
     } catch (error) {
         return new Response(JSON.stringify({ error: 'Internal server error', details: error.message }), { status: 500 });
     }
