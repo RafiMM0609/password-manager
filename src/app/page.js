@@ -22,9 +22,11 @@ export default function Home() {
     })
       .then(async (res) => {
         const data = await res.json();
+        console.log(data);
         if (res.ok) {
           alert('Login berhasil');
-          window.location.href = '/simpanan';
+          document.cookie = `token=${data.token}; path=/; max-age=86400;`;
+          window.location.href = '/app';
         } else {
           alert('Login gagal: ' + (data?.error || 'Unknown error'));
         }
