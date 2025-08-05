@@ -26,7 +26,7 @@ export default function Home() {
         if (res.ok) {
           alert('Login berhasil');
           document.cookie = `token=${data.token}; path=/; max-age=86400;`;
-          window.location.href = '/app';
+          window.location.href = '/enc';
         } else {
           alert('Login gagal: ' + (data?.error || 'Unknown error'));
         }
