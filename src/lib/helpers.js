@@ -52,6 +52,9 @@ async function deriveKey(password, salt) {
 
 // Encrypt with AES-256-GCM
 export async function aesGcmEncrypt(plainText, password) {
+  if (!password) {
+    password = process.env.KEYU;
+  }
   const iv = window.crypto.getRandomValues(new Uint8Array(12)); // 96-bit IV
   const salt = window.crypto.getRandomValues(new Uint8Array(16));
   const key = await deriveKey(password, salt);
@@ -71,19 +74,26 @@ export async function aesGcmEncrypt(plainText, password) {
 
 // Decrypt with AES-256-GCM
 export async function aesGcmDecrypt(cipherTextBase64, password) {
-  const data = new Uint8Array(base64ToArrayBuffer(cipherTextBase64));
-  const salt = data.slice(0, 16);
-  const iv = data.slice(16, 28);
-  const cipher = data.slice(28);
-  const key = await deriveKey(password, salt);
-  try {
-    const plainBuffer = await window.crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv },
-      key,
-      cipher
-    );
-    return new TextDecoder().decode(plainBuffer);
-  } catch (e) {
-    throw new Error('Decryption failed');
+  try{
+    if (!password) {
+      password = process.env.KEYU;
+    }
+    const data = new Uint8Array(base64ToArrayBuffer(cipherTextBase64));
+    const salt = data.slice(0, 16);
+    const iv = data.slice(16, 28);
+    const cipher = data.slice(28);
+    const key = await deriveKey(password, salt);
+    try {
+      const plainBuffer = await window.crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv },
+        key,
+        cipher
+      );
+      return new TextDecoder().decode(plainBuffer);
+    } catch (e) {
+      throw new Error('Decryption failed');
+    }
+  } catch (error) {
+    return cipherTextBase64;
   }
 }
