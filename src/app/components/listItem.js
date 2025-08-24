@@ -34,9 +34,10 @@ export function ListItem({ data, loading, error, deleteItem, onSelect }) {
     if (error) return <div className="flex items-center justify-center h-screen text-red-600">{error}</div>;
 
     return (
-        <div className="flex flex-col items-left justify-center 
-        h-screen bg-gray-400 text-gray-900 
-        space-y-2 p-2 rounded-4xl max-w-60
+        <div className="flex flex-col justify-start 
+        h-[calc(100vh-8rem)] bg-gray-400 text-gray-900 
+        space-y-2 rounded-3xl max-w-xs
+        ml-2 p-4
         overflow-y-auto">
             {decryptedData.length === 0 ? (
                 <div className="p-2 bg-white rounded-xl shadow">Tidak ada data</div>
@@ -44,7 +45,7 @@ export function ListItem({ data, loading, error, deleteItem, onSelect }) {
                 decryptedData.map((item, idx) => (
                     <div key={item.id} className="p-2 bg-white rounded-xl shadow">
                         <p onClick={() => onSelect(item.id)}
-                            className="truncate"
+                            className="break-words cursor-pointer"
                             title={item.data_key}>{item.data_key}</p>
                         <button onClick={(e) => deleteItem(e, item.id)} className="text-red-500 cursor-pointer" title="Delete">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">

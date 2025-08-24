@@ -3,14 +3,16 @@ import Image from "next/image";
 import { supabase } from '@/lib/supabaseClient';
 
 
-import { useState } from "react";
+import { use, useState } from "react";
 
 export default function Home() {
   const [nama, setNama] = useState("");
   const [sandi, setSandi] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const trimmedNama = nama.trim();
     const trimmedSandi = sandi.trim();
     fetch('/api/login', {
@@ -33,6 +35,9 @@ export default function Home() {
       })
       .catch((err) => {
         alert('Terjadi error: ' + err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -66,7 +71,9 @@ export default function Home() {
         />
         <button className="bg-green-800 
         text-white py-1 rounded-md
-        w-[calc(50%)]" type="submit">Submit</button>
+        w-[calc(50%)]" 
+        disabled={loading}
+        type="submit">Submit</button>
       </form>
     </div>
   );

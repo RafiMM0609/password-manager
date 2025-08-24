@@ -17,7 +17,13 @@ export default function Simpanan() {
     const fetchData = () => {
         setLoading(true);
         setError(null);
-        fetch('/api/get-list')
+        fetch('/api/get-list', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1] || ''}`
+            }
+        })
             .then(async (res) => {
                 if (!res.ok) throw new Error('Gagal mengambil data');
                 const result = await res.json();
