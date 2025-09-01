@@ -30,30 +30,78 @@ export function ListItem({ data, loading, error, deleteItem, onSelect }) {
         return () => { isMounted = false; };
     }, [data]);
 
-    if (loading) return <div className="flex items-center justify-center h-screen">Loading...</div>;
-    if (error) return <div className="flex items-center justify-center h-screen text-red-600">{error}</div>;
+    if (loading) return (
+        <div className="flex items-center justify-center h-full p-8">
+            <div className="text-center">
+                <svg className="animate-spin h-8 w-8 text-indigo-600 mx-auto mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p className="text-gray-600">Memuat...</p>
+            </div>
+        </div>
+    );
+    
+    if (error) return (
+        <div className="flex items-center justify-center h-full p-8">
+            <div className="text-center">
+                <svg className="w-8 h-8 text-red-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-red-600">{error}</p>
+            </div>
+        </div>
+    );
 
     return (
-        <div className="flex flex-col justify-start 
-        h-[calc(100vh-8rem)] bg-gray-400 text-gray-900 
-        space-y-2 rounded-3xl max-w-xs
-        ml-2 p-4
-        overflow-y-auto">
+        <div className="h-full overflow-y-auto p-4">
             {decryptedData.length === 0 ? (
-                <div className="p-2 bg-white rounded-xl shadow">Tidak ada data</div>
+                <div className="text-center py-8">
+                    <svg className="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <p className="text-gray-500 text-sm">Belum ada password tersimpan</p>
+                    <p className="text-gray-400 text-xs mt-1">Klik "Tambah Baru" untuk mulai</p>
+                </div>
             ) : (
-                decryptedData.map((item, idx) => (
-                    <div key={item.id} className="p-2 bg-white rounded-xl shadow">
-                        <p onClick={() => onSelect(item.id)}
-                            className="break-words cursor-pointer"
-                            title={item.data_key}>{item.data_key}</p>
-                        <button onClick={(e) => deleteItem(e, item.id)} className="text-red-500 cursor-pointer" title="Delete">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-                ))
+                <div className="space-y-2">
+                    {decryptedData.map((item, idx) => (
+                        <div key={item.id} className="group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100">
+                            <div className="p-4">
+                                <div className="flex items-center justify-between">
+                                    <button 
+                                        onClick={() => onSelect(item.id)}
+                                        className="flex-1 text-left"
+                                        title={`Klik untuk melihat detail ${item.data_key}`}
+                                    >
+                                        <div className="flex items-center">
+                                            <div className="w-8 h-8 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                                <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m0 0a2 2 0 012 2m-2-2v6m0 0V9a2 2 0 00-2-2m0 0V5a2 2 0 00-2-2v4zm-6 0V3a2 2 0 00-2 2v4m0 0a2 2 0 00-2 2v6m0 0v2a2 2 0 002 2h4a2 2 0 002-2v-2" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <p className="font-medium text-gray-800 truncate" style={{maxWidth: '200px'}}>
+                                                    {item.data_key}
+                                                </p>
+                                                <p className="text-xs text-gray-500 mt-1">Klik untuk melihat detail</p>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <button 
+                                        onClick={(e) => deleteItem(e, item.id)} 
+                                        className="text-gray-400 hover:text-red-500 transition-colors duration-200 p-1 rounded" 
+                                        title="Hapus password"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             )}
         </div>
     );
