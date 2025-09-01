@@ -7,18 +7,12 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
     const [note, setNote] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    
-    const existdatahandler = () => {
+
+    useEffect(() => {
         if (existingData) {
             setKey(existingData[0].data_key || "");
             setValue(existingData[0].data_value || "");
             setNote(existingData[0].data_note || "");
-        }
-    }
-
-    useEffect(() => {
-        if (existingData) {
-            existdatahandler();
         }
     }, [existingData])
 
