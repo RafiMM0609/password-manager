@@ -7,18 +7,12 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
     const [note, setNote] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    
-    const existdatahandler = () => {
+
+    useEffect(() => {
         if (existingData) {
             setKey(existingData[0].data_key || "");
             setValue(existingData[0].data_value || "");
             setNote(existingData[0].data_note || "");
-        }
-    }
-
-    useEffect(() => {
-        if (existingData) {
-            existdatahandler();
         }
     }, [existingData])
 
@@ -58,68 +52,125 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
     }
 
     return (
-        <div className="backdrop-blur-sm fixed inset-0 flex items-center justify-center bg-opacity-40 z-50">
-            
-            <div className="bg-gray-100 p-4 rounded-lg shadow-lg relative w-[500px]">
-                <button
-                    onClick={onClose}
-                    className="bg-red-500 rounded-full w-8 h-8 flex items-center justify-center absolute top-0 right-0 text-white hover:bg-red-600 text-2xl shadow focus:outline-none"
-                    aria-label="Tutup"
-                >
-                    &times;
-                </button>
-                <form className="flex flex-col items-center justify-center space-y-2 bg-gray-800 p-4 rounded-md shadow-md">
-                    <input
-                        className="text-left border-2 pl-4 border-gray-100 rounded-md w-full h-12"
-                        type="text"
-                        required={true}
-                        name="key"
-                        placeholder="Masukan key"
-                        value={key}
-                        onChange={e => setKey(e.target.value)}
-                    />
-                    <div className="relative w-full">
-                        <input
-                            className="text-left border-2 pl-4 border-gray-100 rounded-md w-full h-12 pr-10"
-                            type={showPassword ? "text" : "password"}
-                            required={true}
-                            name="value"
-                            placeholder="Masukan nilai"
-                            value={value}
-                            onChange={e => setValue(e.target.value)}
-                        />
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-auto max-h-[90vh] overflow-hidden">
+                {/* Header */}
+                <div className="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-4 text-white">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-xl font-semibold">
+                            {existingData ? 'Edit Password' : 'Tambah Password Baru'}
+                        </h2>
                         <button
-                            type="button"
-                            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 focus:outline-none"
-                            onClick={() => setShowPassword(v => !v)}
-                            tabIndex={-1}
-                            aria-label={showPassword ? "Sembunyikan password" : "Lihat password"}
+                            onClick={onClose}
+                            className="text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/20"
+                            aria-label="Tutup"
                         >
-                            {showPassword ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 2.25 12c2.083 3.75 6.105 6.75 9.75 6.75 1.563 0 3.063-.375 4.438-1.027M21.75 12c-.375-.75-.938-1.5-1.563-2.152m-2.25-2.25A10.477 10.477 0 0 0 12 5.25c-1.563 0-3.063.375-4.438 1.027M9.75 9.75a3 3 0 1 1 4.5 4.5m-4.5-4.5L4.5 4.5m15 15-4.5-4.5" />
-                                </svg>
-                            ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12S5.25 6.75 12 6.75 21.75 12 21.75 12 18.75 17.25 12 17.25 2.25 12 2.25 12z" />
-                                    <circle cx="12" cy="12" r="3" />
-                                </svg>
-                            )}
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
                         </button>
                     </div>
-                    <textarea
-                        className="text-left border-2 pl-4 border-gray-100 rounded-md w-full h-60"
-                        name="note"
-                        placeholder="Masukan catatan"
-                        value={note}
-                        onChange={e => setNote(e.target.value)}
-                    />
-                    <button 
-                    onClick={handleSubmit} 
-                    disabled={loading}
-                    type="submit" 
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md w-full">Tambah</button>
-                </form>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Website/Service Name */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Website / Nama Layanan
+                            </label>
+                            <input
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                                type="text"
+                                required={true}
+                                name="key"
+                                placeholder="Contoh: Gmail, Facebook, Instagram"
+                                value={key}
+                                onChange={e => setKey(e.target.value)}
+                            />
+                        </div>
+
+                        {/* Password */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Password
+                            </label>
+                            <div className="relative">
+                                <input
+                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 pr-12"
+                                    type={showPassword ? "text" : "password"}
+                                    required={true}
+                                    name="value"
+                                    placeholder="Masukan password"
+                                    value={value}
+                                    onChange={e => setValue(e.target.value)}
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors focus:outline-none"
+                                    onClick={() => setShowPassword(v => !v)}
+                                    tabIndex={-1}
+                                    aria-label={showPassword ? "Sembunyikan password" : "Lihat password"}
+                                >
+                                    {showPassword ? (
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 2.25 12c2.083 3.75 6.105 6.75 9.75 6.75 1.563 0 3.063-.375 4.438-1.027M21.75 12c-.375-.75-.938-1.5-1.563-2.152m-2.25-2.25A10.477 10.477 0 0 0 12 5.25c-1.563 0-3.063.375-4.438 1.027M9.75 9.75a3 3 0 1 1 4.5 4.5m-4.5-4.5L4.5 4.5m15 15-4.5-4.5" />
+                                        </svg>
+                                    ) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12S5.25 6.75 12 6.75 21.75 12 21.75 12 18.75 17.25 12 17.25 2.25 12 2.25 12z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg>
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Notes */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Catatan (opsional)
+                            </label>
+                            <textarea
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 resize-none"
+                                name="note"
+                                rows="4"
+                                placeholder="Tambahkan catatan seperti username, email, atau informasi tambahan lainnya"
+                                value={note}
+                                onChange={e => setNote(e.target.value)}
+                            />
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex space-x-3 pt-4">
+                            <button
+                                type="button"
+                                onClick={onClose}
+                                className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
+                            >
+                                Batal
+                            </button>
+                            <button 
+                                type="submit"
+                                disabled={loading}
+                                className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg font-medium hover:from-indigo-600 hover:to-purple-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {loading ? (
+                                    <div className="flex items-center justify-center">
+                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Menyimpan...
+                                    </div>
+                                ) : (
+                                    existingData ? 'Update' : 'Simpan'
+                                )}
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );
