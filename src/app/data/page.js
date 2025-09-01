@@ -111,7 +111,7 @@ export default function Simpanan() {
         <div className="flex items-center h-screen bg-gray-300">
             <ListItem data={data} loading={loading} error={error} deleteItem={handleDelete} onSelect={handleSelect} />
             <div className="flex flex-col items-center justify-center h-screen bg-gray-300 p-8">
-                <button onClick={() => setShowModal(true)} className="bg-green-600 px-4 rounded-3xl text-4xl">
+                <button onClick={() => setShowModal(true)} className="bg-red-600 px-4 rounded-3xl text-4xl">
                     +
                 </button>
                 <h1 className="text-gray-800 text-4xl">Simpanan</h1>

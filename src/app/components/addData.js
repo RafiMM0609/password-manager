@@ -108,7 +108,7 @@ export function AddData({ onClose, onSuccess, existingData }) {
                         value={note}
                         onChange={e => setNote(e.target.value)}
                     />
-                    <button onClick={handleSubmit} type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md w-full">Tambah</button>
+                    <button onClick={handleSubmit} type="submit" className="bg-red-600 text-white px-4 py-2 rounded-md w-full">Tambah</button>
                 </form>
             </div>
         </div>

@@ -69,7 +69,7 @@ export default function Home() {
           value={sandi}
           onChange={e => setSandi(e.target.value)}
         />
-        <button className="bg-green-800 
+        <button className="bg-red-600 
         text-white py-1 rounded-md
         w-[calc(50%)]" 
         disabled={loading}

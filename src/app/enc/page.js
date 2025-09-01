@@ -17,7 +17,7 @@ export default function Myenc() {
                 onChange={e => setData(e.target.value)}
             />
             <button
-                className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                className="bg-red-600 text-white px-4 py-2 rounded-md"
                 onClick={async () => {
                     const encrypted = await aesGcmEncrypt(data, password);
                     alert(encrypted);
@@ -35,7 +35,7 @@ export default function Myenc() {
                 onChange={e =>  setData(e.target.value)}
             />
             <button
-                className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                className="bg-red-600 text-white px-4 py-2 rounded-md"
                 onClick={async () => {
                     const decrypted = await aesGcmDecrypt(data, password);
                     alert(decrypted);

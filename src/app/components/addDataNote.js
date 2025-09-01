@@ -118,7 +118,7 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
                     onClick={handleSubmit} 
                     disabled={loading}
                     type="submit" 
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md w-full">Tambah</button>
+                    className="bg-red-600 text-white px-4 py-2 rounded-md w-full">Tambah</button>
                 </form>
             </div>
         </div>
