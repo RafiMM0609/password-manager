@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --foreground: #2d3748;
+  --background: linear-gradient(135deg, #6b7280 0%, #dc2626 100%);
+  --foreground: #374151;
 }
 
 @theme inline {
@@ -30,10 +30,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #9ca3af;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #6b7280;
 }

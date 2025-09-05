@@ -55,7 +55,7 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-auto max-h-[90vh] overflow-hidden">
                 {/* Header */}
-                <div className="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-4 text-white">
+                <div className="bg-gradient-to-r from-gray-500 to-red-600 px-6 py-4 text-white">
                     <div className="flex items-center justify-between">
                         <h2 className="text-xl font-semibold">
                             {existingData ? 'Edit Password' : 'Tambah Password Baru'}
@@ -81,7 +81,7 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
                                 Website / Nama Layanan
                             </label>
                             <input
-                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200"
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200"
                                 type="text"
                                 required={true}
                                 name="key"
@@ -98,7 +98,7 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
                             </label>
                             <div className="relative">
                                 <input
-                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 pr-12"
+                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 pr-12"
                                     type={showPassword ? "text" : "password"}
                                     required={true}
                                     name="value"
@@ -133,7 +133,7 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
                                 Catatan (opsional)
                             </label>
                             <textarea
-                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 resize-none"
+                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-200 resize-none"
                                 name="note"
                                 rows="4"
                                 placeholder="Tambahkan catatan seperti username, email, atau informasi tambahan lainnya"
@@ -154,7 +154,7 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
                             <button 
                                 type="submit"
                                 disabled={loading}
-                                className="flex-1 px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-lg font-medium hover:from-indigo-600 hover:to-purple-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 px-4 py-3 bg-gradient-to-r from-gray-500 to-red-600 text-white rounded-lg font-medium hover:from-gray-600 hover:to-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {loading ? (
                                     <div className="flex items-center justify-center">
