@@ -42,23 +42,27 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-400 via-gray-500 to-red-500 flex items-center justify-center p-6">
+    <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'var(--background)' }}>
       <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-gray-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'var(--primary)' }}>
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Password Manager</h1>
-          <p className="text-gray-600">Masuk ke akun Anda</p>
+          <div className="flex flex-col justify-center items-center w-full h-max">
+            <h1 className="animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-white pr-2 text-4xl text-gray font-bold">
+              Password Manager
+            </h1>
+          </div>
+          <p style={{ color: 'var(--text-primary)' }}>Masuk ke akun Anda</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>
               Nama Pengguna
             </label>
             <div className="relative">
@@ -78,7 +82,7 @@ export default function Home() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-primary)' }}>
               Kata Sandi
             </label>
             <div className="relative">
@@ -91,7 +95,7 @@ export default function Home() {
                 value={sandi}
                 onChange={e => setSandi(e.target.value)}
               />
-              <svg className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="absolute left-3 top-3.5 w-5 h-5" style={{ color: 'var(--text-secondary)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
@@ -118,7 +122,7 @@ export default function Home() {
 
         {/* Footer */}
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
             Aplikasi penyimpanan kata sandi yang aman
           </p>
         </div>

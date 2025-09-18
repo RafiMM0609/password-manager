@@ -1,0 +1,445 @@
+/* PoweredByAI Component Styles */
+
+.powered-by-ai-container {
+  position: relative;
+  display: inline-block;
+  opacity: 1;
+  will-change: transform;
+  transform: perspective(1200px);
+}
+
+.powered-by-ai-badge {
+  --border-radius: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 200px;
+  height: 42px;
+  box-sizing: border-box;
+  backdrop-filter: blur(20px);
+  isolation: isolate;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 1px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Reusable Border Light Animation */
+.border-light {
+  --border-light-color: var(--glow-color, #2ed3b7);
+  --border-light-size: 2px;
+  --border-light-blur: 6px;
+  --border-light-opacity: 0.8;
+  --border-light-duration: 4s;
+  --border-light-length: 120deg;
+  position: relative;
+  overflow: visible;
+}
+
+/* Primary light path */
+.border-light::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--border-light-size));
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    var(--border-light-color) calc(var(--border-light-length) * 0.2),
+    var(--border-light-color) calc(var(--border-light-length) * 0.4),
+    transparent var(--border-light-length)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-light-spin var(--border-light-duration) linear infinite;
+  filter: blur(calc(var(--border-light-blur) * 0.5));
+}
+
+/* Glow trail effect */
+.border-light::after {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--border-light-size));
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    color-mix(in srgb, var(--border-light-color) 40%, transparent) calc(var(--border-light-length) * 0.3),
+    color-mix(in srgb, var(--border-light-color) 20%, transparent) calc(var(--border-light-length) * 0.6),
+    transparent calc(var(--border-light-length) * 0.8)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-light-spin var(--border-light-duration) linear infinite;
+  animation-delay: calc(var(--border-light-duration) * -0.1);
+  filter: blur(var(--border-light-blur));
+  opacity: var(--border-light-opacity);
+}
+
+/* Speed variations */
+.border-light-slow {
+  --border-light-duration: 8s;
+  --border-light-length: 160deg;
+  --border-light-blur: 8px;
+}
+
+.border-light-medium {
+  --border-light-duration: 5s;
+  --border-light-length: 120deg;
+  --border-light-blur: 6px;
+}
+
+.border-light-fast {
+  --border-light-duration: 3s;
+  --border-light-length: 90deg;
+  --border-light-blur: 4px;
+}
+
+/* Size variations */
+.border-light-thin {
+  --border-light-size: 1px;
+  --border-light-blur: 4px;
+}
+
+.border-light-thick {
+  --border-light-size: 3px;
+  --border-light-blur: 8px;
+}
+
+/* Intensity variations */
+.border-light-subtle {
+  --border-light-opacity: 0.5;
+}
+
+.border-light-intense {
+  --border-light-opacity: 1;
+}
+
+@keyframes border-light-spin {
+  0% {
+    transform: rotate(0deg);
+    filter: blur(calc(var(--border-light-blur) * 0.5));
+  }
+  25% {
+    filter: blur(calc(var(--border-light-blur) * 0.6));
+  }
+  50% {
+    filter: blur(calc(var(--border-light-blur) * 0.5));
+  }
+  75% {
+    filter: blur(calc(var(--border-light-blur) * 0.6));
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: blur(calc(var(--border-light-blur) * 0.5));
+  }
+}
+
+.powered-by-ai-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(46, 211, 183, 0.3);
+}
+
+/* Enhance border light effect on hover */
+.powered-by-ai-badge.border-light:hover {
+  --border-light-opacity: 1;
+  --border-light-length: calc(var(--border-light-length) * 1.2);
+}
+
+.powered-by-ai-badge.border-light:hover::before {
+  filter: blur(calc(var(--border-light-blur) * 0.4));
+}
+
+.powered-by-ai-badge.border-light:hover::after {
+  filter: blur(calc(var(--border-light-blur) * 0.8));
+}
+
+/* Animation hover states for badge */
+
+/* Neon Border Animation */
+
+/* Stroke Effect */
+.stroke-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.02) 100%);
+  border-radius: 24px;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Background Fill */
+.background-fill {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
+  border-radius: 23px;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Animated Dot */
+.animated-dot {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.9);
+  width: 12px;
+  height: 12px;
+  animation: dotPulse 3s ease-in-out infinite;
+  z-index: 10;
+}
+
+.dot-outer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(46, 211, 183, 0.3) 0%, rgba(46, 211, 183, 0.1) 70%, transparent 100%);
+  border-radius: 100%;
+  animation: dotOuterPulse 4s ease-in-out infinite;
+}
+
+.dot-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, var(--dot-color, #2ed3b7) 0%, rgba(46, 211, 183, 0.8) 100%);
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  animation: dotInnerGlow 3s ease-in-out infinite alternate;
+  box-shadow: 
+    0 0 8px rgba(46, 211, 183, 0.6),
+    0 0 16px rgba(46, 211, 183, 0.3);
+}
+
+/* Text Content */
+.text-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 26px;
+  flex: 1;
+}
+
+.text-content p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 140%;
+  color: var(--text-color, rgb(255, 255, 255));
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Shimmer/Shine effect for text */
+.shimmer-text {
+  /* Use the existing text color as base with a moving highlight band */
+  background-image: linear-gradient(
+    90deg,
+    var(--text-color, #ffffff) 0%,
+    var(--text-color, #ffffff) 35%,
+    rgba(255, 255, 255, 0.25) 47%,
+    #ffffff 50%,
+    rgba(255, 255, 255, 0.25) 53%,
+    var(--text-color, #ffffff) 65%,
+    var(--text-color, #ffffff) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* reveal gradient through text */
+  animation: shimmerSweep 2.2s ease-in-out infinite;
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* Without dot, center the text */
+.powered-by-ai-badge:not(:has(.animated-dot)) .text-content {
+  margin-left: 0;
+}
+
+/* Animations */
+/* Animation keyframes for neon and shimmer effects */
+
+@keyframes dotPulse {
+  0%, 100% {
+    transform: translateY(-50%) scale(0.8) rotate(358.787deg);
+  }
+  50% {
+    transform: translateY(-50%) scale(0.9) rotate(361deg);
+  }
+}
+
+@keyframes dotOuterPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+}
+
+@keyframes dotInnerGlow {
+  0% {
+    box-shadow: 0 0 5px var(--dot-color, #2ed3b7);
+  }
+  100% {
+    box-shadow: 0 0 15px var(--dot-color, #2ed3b7), 0 0 25px var(--dot-color, #2ed3b7);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .powered-by-ai-badge {
+    min-width: 180px;
+    height: 38px;
+    padding: 8px 16px;
+  }
+  
+  .text-content p {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .animated-dot {
+    width: 10px;
+    height: 10px;
+    left: 12px;
+  }
+  
+  .dot-inner {
+    width: 5px;
+    height: 5px;
+  }
+  
+  .text-content {
+    margin-left: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .powered-by-ai-badge {
+    min-width: 140px;
+    height: 30px;
+    padding: 5px 12px;
+  }
+  
+  .text-content p {
+    font-size: 11px;
+  }
+  
+  .animated-dot {
+    width: 10px;
+    height: 10px;
+    left: 8px;
+  }
+  
+  .dot-inner {
+    width: 5px;
+    height: 5px;
+  }
+  
+  .text-content {
+    margin-left: 18px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .powered-by-ai-badge {
+    background-color: rgba(77, 77, 77, 0.15);
+  }
+}
+
+/* Accessibility */
+.powered-by-ai-badge:focus {
+  outline: 2px solid var(--dot-color, #2ed3b7);
+  outline-offset: 2px;
+}
+
+.powered-by-ai-badge:focus-visible {
+  outline: 2px solid var(--dot-color, #2ed3b7);
+  outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .powered-by-ai-badge {
+    border: 1px solid var(--text-color, #ffffff);
+  }
+  
+  .stroke-effect {
+    display: none;
+  }
+
+  .powered-by-ai-badge.border-light::before,
+  .powered-by-ai-badge.border-light::after {
+    display: none; /* simplify visuals for high contrast */
+  }
+
+  /* Keep text legible without gradient in high contrast */
+  .shimmer-text {
+    color: var(--text-color, #ffffff);
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    animation: none;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-text {
+    animation: none;
+  }
+  .glow-path {
+    animation: none;
+  }
+}

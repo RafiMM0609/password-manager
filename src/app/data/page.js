@@ -5,6 +5,7 @@ import { aesGcmDecrypt, aesGcmEncrypt } from "@/lib/helpers";
 // import { AddData } from "@/app/components/addData";
 import { AddDataNote } from "@/app/components/addDataNote";
 import { ListItem } from "@/app/components/listItem";
+import NavBar from "@/components/navbar";
 
 
 export default function Simpanan() {
@@ -110,35 +111,13 @@ export default function Simpanan() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-red-100">
             {/* Header */}
-            <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16">
-                        <div className="flex items-center">
-                            <div className="w-8 h-8 bg-gradient-to-r from-gray-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
-                                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                </svg>
-                            </div>
-                            <h1 className="text-xl font-semibold text-gray-800">Password Manager</h1>
-                        </div>
-                        <button 
-                            onClick={() => {
-                                document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                                window.location.href = '/';
-                            }}
-                            className="text-gray-600 hover:text-gray-800 text-sm font-medium"
-                        >
-                            Keluar
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <NavBar />
 
-            <div className="flex h-[calc(100vh-4rem)]">
+            <div className="flex h-[calc(100vh-8rem)]">
                 {/* Sidebar */}
                 <div className="w-80 bg-white/70 backdrop-blur-sm border-r border-gray-200 flex flex-col">
                     <div className="p-4 border-b border-gray-200">
-                        <h2 className="text-lg font-semibold text-gray-800 mb-2">Daftar Password</h2>
+                        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Daftar Password</h2>
                         <button 
                             onClick={() => setShowModal(true)} 
                             className="w-full bg-gradient-to-r from-gray-500 to-red-600 text-white px-4 py-2 rounded-lg font-medium hover:from-gray-600 hover:to-red-700 transition-all duration-200 flex items-center justify-center"
@@ -156,34 +135,31 @@ export default function Simpanan() {
 
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col items-center justify-center p-8">
-                    <div className="text-center max-w-md">
+                    <div className="box-reflect animate-dimlight text-center max-w-md">
                         <div className="w-20 h-20 bg-gradient-to-r from-gray-100 to-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
                             <svg className="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-3">Selamat Datang!</h2>
-                        <p className="text-gray-600 text-lg mb-4">
-                            Kelola password Anda dengan aman dan mudah
+                        <h2 className="text-4xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>Welcome Back!</h2>
+                        <p className="text-2xl mb-4" style={{ color: 'var(--text-primary)' }}>
+                            Manage your passwords securely and effortlessly.
                         </p>
-                        <p className="text-gray-500 mb-6">
-                            Pilih password dari daftar di sebelah kiri untuk melihat detailnya, atau tambah password baru.
-                        </p>
-                        <div className="flex flex-col space-y-3 text-sm text-gray-500">
+                        <div className="flex flex-col space-y-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
                             <div className="flex items-center">
-                                <svg className="w-4 h-4 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 h-4 mr-2" style={{ color: 'var(--text-accent)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                                 Enkripsi end-to-end
                             </div>
                             <div className="flex items-center">
-                                <svg className="w-4 h-4 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 h-4 mr-2" style={{ color: 'var(--text-accent)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                                 Akses yang aman
                             </div>
                             <div className="flex items-center">
-                                <svg className="w-4 h-4 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 h-4 mr-2" style={{ color: 'var(--text-accent)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                                 Mudah digunakan

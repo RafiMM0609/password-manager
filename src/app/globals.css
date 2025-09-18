@@ -1,15 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  --background: linear-gradient(135deg, #6b7280 0%, #dc2626 100%);
+  --background: linear-gradient(135deg, #414242 0%, #dc2626 100%);
   --foreground: #374151;
+  --primary: #dc2626;
+  --secondary: #414242;
+  --text-primary: var(--foreground);
+  --text-secondary: #6b7280;
+  --text-accent: var(--primary);
+  --text-white: #e0e0e0;
+}
+
+[data-theme="dark"] {
+  --background: linear-gradient(135deg, #1f2937 0%, #7f1d1d 100%);
+  --foreground: #f9fafb;
+  --primary: #7f1d1d;
+  --secondary: #1f2937;
+  --text-primary: var(--foreground);
+  --text-secondary: #9ca3af;
+  --text-accent: var(--primary);
+  --text-white: #e0e0e0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-accent: var(--text-accent);
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --animate-typing: typing 3s steps(20) infinite alternate, blink .7s infinite;
+  --animate-dimlight: dimlight 5s infinite;
+}
+
+@keyframes typing {
+  0% {
+    width: 0%;
+    visibility: hidden;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: white;
+  }
+}
+
+@keyframes dimlight {
+  0%, 18%, 20%, 50.1%, 60%, 65.1%, 80%, 90.1%, 92% {
+    color: #0e3742;
+    box-shadow: none;
+  }
+  18.1%, 20.1%, 30%, 50%, 60.1%, 65%, 80.1%, 90%, 92.1%, 100% {
+    color: #fff;
+    text-shadow: 0 0 10px #3d3d3d;
+  }
+}
+
+.box-reflect {
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0004);
 }
 
 body {
