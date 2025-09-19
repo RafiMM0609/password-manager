@@ -15,6 +15,13 @@ export default function NavBar(){
                             Compare
                         </button>
                         <button 
+                            onClick={() => window.location.href = '/convert-json'}
+                            onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
+                            onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}
+                        >
+                            Convert JSON
+                        </button>
+                        <button 
                             onClick={() => {
                                 document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
                                 window.location.href = '/';
