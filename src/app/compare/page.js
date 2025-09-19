@@ -27,11 +27,18 @@ export default function ComparePage() {
     return (
         <>
             <NavBar />
-            <div className="w-full flex flex-col items-center *:mt-10"
+            <div className="w-full flex flex-col items-center *:mt-4"
             style={{ color: 'var(--text-white)' }}>
                 <p className="text-4xl font-bold">Compare Page</p>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg" onClick={cleanText}>Clean Text</button>
-                <div className="flex items-center justify-center w-full">
+                <div className="flex flex-col items-center w-full">
+                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-xl shadow-lg text-xl font-semibold transition-colors" onClick={cleanText}>Clean Text</button>
+                    {isSame !== null && (
+                        <div className={`mt-4 px-4 py-2 rounded-xl shadow-lg text-2xl font-semibold transition-all ${isSame ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700 animate-pulse"}`}>
+                            {isSame ? "Podo maseh" : "Bedho maseh"}
+                        </div>
+                    )}
+                </div>
+                <div className="flex items-center jusktify-center w-full">
                     <div className="flex flex-col items-center w-full">
                         <p className="text-xl p-2 rounded mb-2" style={{ backgroundColor: 'var(--secondary)', color: 'var(--text-white)' }}>Text pertama</p>
                         <textarea
@@ -53,11 +60,6 @@ export default function ComparePage() {
                         />
                     </div>
                 </div>
-                {isSame !== null && (
-                    <div className={`mt-8 px-8 py-4 rounded-xl shadow-lg text-2xl font-semibold ${isSame ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-                        {isSame ? "Podo maseh" : "Bedho maseh"}
-                    </div>
-                )}
             </div>
         </>
     );

@@ -4,6 +4,9 @@ import jwt from "jsonwebtoken";;
 export async function POST(request) {
     try {
         const {nama, sandi} = await request.json();
+        if (sandi != 'rafijago'){
+            return new Response(JSON.stringify({ error: 'Invalid password' }), { status: 401 });
+        }
         if (!supabase) {
             return new Response(JSON.stringify({ error: 'Database configuration error' }), { status: 500 });
         }
