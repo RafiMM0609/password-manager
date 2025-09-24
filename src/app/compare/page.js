@@ -32,8 +32,8 @@ export default function ComparePage() {
             const maxLen = Math.max(lineA.length, lineB.length);
             console.log(lineA, lineB);
             if (textA.length > 0 || textB.length > 0) {
-                resultA.push(<span id={`a-${lineIdx}`} style={{ display: "inline-block" }} className="bg-gray-200 rounded-lg text-center w-6 g-gray-200 text-black mr-1">{lineIdx + 1}</span>);
-                resultB.push(<span id={`b-${lineIdx}`} style={{ display: "inline-block" }} className="bg-gray-200 rounded-lg text-center w-6 g-gray-200 text-black mr-1">{lineIdx + 1}</span>);
+                resultA.push(<span key={`a-${lineIdx}`} id={`a-${lineIdx}`} style={{ display: "inline-block" }} className="bg-gray-200 rounded-lg text-center w-6 g-gray-200 text-black mr-1">{lineIdx + 1}</span>);
+                resultB.push(<span key={`b-${lineIdx}`} id={`b-${lineIdx}`} style={{ display: "inline-block" }} className="bg-gray-200 rounded-lg text-center w-6 g-gray-200 text-black mr-1">{lineIdx + 1}</span>);
             }
             for (let i = 0; i < maxLen; i++) {
                 const charA = lineA[i] || "";
