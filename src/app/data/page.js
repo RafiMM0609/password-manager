@@ -109,18 +109,21 @@ export default function Simpanan() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-red-100">
+        <div className="min-h-screen" style={{ background: 'var(--background)' }}>
             {/* Header */}
             <NavBar />
 
-            <div className="flex h-[calc(100vh-8rem)]">
+            <div className="flex h-[calc(100vh-5rem)]">
                 {/* Sidebar */}
-                <div className="w-80 bg-white/70 backdrop-blur-sm border-r border-gray-200 flex flex-col">
+                <div className="w-80 border-r rounded-xl flex flex-col mt-2"
+                    style={{ background: 'var(--modal-bg)'}}
+                >
                     <div className="p-4 border-b border-gray-200">
-                        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>Daftar Password</h2>
+                        <h2 className="text-lg font-semibold mb-2 shadow-2xl text-white text-center">Daftar Password</h2>
                         <button 
                             onClick={() => setShowModal(true)} 
-                            className="w-full bg-gradient-to-r from-gray-500 to-red-600 text-white px-4 py-2 rounded-lg font-medium hover:from-gray-600 hover:to-red-700 transition-all duration-200 flex items-center justify-center"
+                            className="w-full text-white px-4 py-2 rounded-lg font-medium hover:from-gray-600 hover:to-red-700 transition-all duration-200 flex items-center justify-center"
+                            style={{ background: 'var(--background)' }}
                         >
                             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
