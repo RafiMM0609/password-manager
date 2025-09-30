@@ -63,7 +63,13 @@ export function ListItem({ data, loading, error, deleteItem, onSelect }) {
         <div className="h-full overflow-y-auto p-4">
             <input type="search" placeholder="Cari..." 
                 className="w-full mb-2 p-2 border border-gray-300 rounded" 
-                style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)', borderColor: 'var(--border-color)' }} 
+                style={{ 
+                    backgroundColor: 'var(--bg-secondary)', 
+                    color: '#ffff', 
+                    borderColor: 'var(--border-color)',
+                    cursor: 'text',
+                    caretColor: 'white'
+                }} 
                 onChange={(e) => handleClientSearch(e)} 
             />
             {decryptedData.length === 0 ? (
