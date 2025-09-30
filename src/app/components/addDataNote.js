@@ -55,7 +55,9 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-auto max-h-[90vh] overflow-hidden">
                 {/* Header */}
-                <div className="bg-gradient-to-r from-gray-500 to-red-600 px-6 py-4 text-white">
+                <div className="px-6 py-4 text-white"
+                    style={{ background: 'var(--background)' }}
+                    >
                     <div className="flex items-center justify-between">
                         <h2 className="text-xl font-semibold">
                             {existingData ? 'Edit Password' : 'Tambah Password Baru'}
