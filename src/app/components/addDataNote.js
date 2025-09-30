@@ -156,7 +156,8 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
                             <button 
                                 type="submit"
                                 disabled={loading}
-                                className="flex-1 px-4 py-3 bg-gradient-to-r from-gray-500 to-red-600 text-white rounded-lg font-medium hover:from-gray-600 hover:to-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 px-4 py-3 text-white rounded-lg font-medium hover:from-gray-600 hover:to-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                style={{ background: 'var(--background)' }}
                             >
                                 {loading ? (
                                     <div className="flex items-center justify-center">
