@@ -55,6 +55,12 @@ export function ListItem({ data, loading, error, deleteItem, onSelect }) {
 
     return (
         <div className="h-full overflow-y-auto p-4">
+            <search>
+                <input
+                    type="text"
+                    placeholder="Cari password..."
+                ></input>
+            </search>
             {decryptedData.length === 0 ? (
                 <div className="text-center py-8">
                     <svg className="w-12 h-12 mx-auto mb-3" style={{ color: 'var(--text-secondary)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">

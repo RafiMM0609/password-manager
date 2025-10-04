@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { aesGcmDecrypt, aesGcmEncrypt } from "@/lib/helpers";
+import { aesGcmDecrypt, aesGcmEncrypt, authenticatedFetch } from "@/lib/helpers";
 
 export function AddDataNote({ onClose, onSuccess, existingData }) {
     const [key, setKey] = useState("");
@@ -24,11 +24,8 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
             const trimmedNote = note.trim();
 
             setLoading(true);
-            const res = await fetch('/api/data', {
+            const res = await authenticatedFetch('/api/data', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
                 body: JSON.stringify({ 
                     id: existingData ? existingData[0].id : null,
                     key: await aesGcmEncrypt(trimmedKey), 

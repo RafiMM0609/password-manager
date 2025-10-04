@@ -1,6 +1,27 @@
 import { supabase } from "@/lib/supabaseClient";
+import jwt from 'jsonwebtoken';
+
+function authenticate(request) {
+  const token = request.headers.get('Authorization')?.split(' ')[1];
+  if (!token) {
+    return { error: 'Unauthorized', status: 401 };
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return { user: decoded };
+  } catch (error) {
+    if (error.name === 'TokenExpiredError') {
+      return { error: 'Token expired', status: 401 };
+    }
+    return { error: 'Invalid token', status: 401 };
+  }
+}
 
 export async function POST(request) {
+    const auth = authenticate(request);
+    if (auth.error) {
+        return new Response(JSON.stringify({ error: auth.error }), { status: auth.status });
+    }
     try {
         const { key, value, note, id } = await request.json();
         const trimmedKey = key.trim();
@@ -40,6 +61,10 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
+    const auth = authenticate(request);
+    if (auth.error) {
+        return new Response(JSON.stringify({ error: auth.error }), { status: auth.status });
+    }
     try {
         const { searchParams } = new URL(request.url);
         const id = searchParams.get("id");
@@ -60,6 +85,10 @@ export async function GET(request) {
 }
 
 export async function DELETE(request) {
+    const auth = authenticate(request);
+    if (auth.error) {
+        return new Response(JSON.stringify({ error: auth.error }), { status: auth.status });
+    }
     try {
         const { id } = await request.json();
         const trimmedId = id.trim();

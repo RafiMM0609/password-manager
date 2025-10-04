@@ -97,3 +97,31 @@ export async function aesGcmDecrypt(cipherTextBase64, password) {
     return cipherTextBase64;
   }
 }
+
+// Custom authenticated fetch function
+export async function authenticatedFetch(url, options = {}) {
+  const token = document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
+  
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  
+  const response = await fetch(url, {
+    ...options,
+    headers,
+  });
+  
+  if (response.status === 401) {
+    // Clear token and redirect to login
+    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+    window.location.href = '/';
+    throw new Error('Unauthorized');
+  }
+  
+  return response;
+}

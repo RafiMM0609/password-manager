@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { aesGcmDecrypt, aesGcmEncrypt } from "@/lib/helpers";
+import { aesGcmDecrypt, aesGcmEncrypt, authenticatedFetch } from "@/lib/helpers";
 // import { AddData } from "@/app/components/addData";
 import { AddDataNote } from "@/app/components/addDataNote";
 import { ListItem } from "@/app/components/listItem";
@@ -18,12 +18,8 @@ export default function Simpanan() {
     const fetchData = () => {
         setLoading(true);
         setError(null);
-        fetch('/api/get-list', {
+        authenticatedFetch('/api/get-list', {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1] || ''}`
-            }
         })
             .then(async (res) => {
                 if (!res.ok) throw new Error('Gagal mengambil data');
@@ -45,12 +41,8 @@ export default function Simpanan() {
         setLoading(true);
         setError(null);
         const trimmedId = id.trim();
-        fetch('api/data', {
+        authenticatedFetch('api/data', {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'token': document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1] || ''
-            },
             body: JSON.stringify({ id: trimmedId }),
         })
         .then (async (res) => {
@@ -70,12 +62,8 @@ export default function Simpanan() {
         setError(null);
 
         const trimmedId = id.trim();
-        fetch(`api/data?id=${encodeURIComponent(trimmedId)}`, {
+        authenticatedFetch(`api/data?id=${encodeURIComponent(trimmedId)}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'token': document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1] || ''
-            },
         })
         .then(async (res) => {
             if (!res.ok) throw new Error('Gagal mengambil data');
