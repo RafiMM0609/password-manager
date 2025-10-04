@@ -24,7 +24,6 @@ export default function Home() {
     })
       .then(async (res) => {
         const data = await res.json();
-        console.log(data);
         if (res.ok) {
           alert('Login berhasil');
           document.cookie = `token=${data.token}; path=/; max-age=86400;`;

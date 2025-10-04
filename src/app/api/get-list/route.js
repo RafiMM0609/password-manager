@@ -6,9 +6,9 @@ export async function GET(request) {
     if (!token) {
         return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 });
     }
-    
+    let decoded;
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
             return new Response(JSON.stringify({ error: 'Token expired' }), { status: 401 });
@@ -26,6 +26,7 @@ export async function GET(request) {
     if (src) {
         query = query.ilike('data_key', `%${src}%`);
     }
+    query = query.eq('userid', decoded.id).order('created_at', { ascending: false });
     const { data, error } = await query;
 
     if (error) {

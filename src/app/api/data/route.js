@@ -34,6 +34,7 @@ export async function POST(request) {
                     data_key: trimmedKey, 
                     data_value: trimmedValue, 
                     data_note: trimmedNote,
+                    userid: auth.user.id,
                     created_at: new Date().toISOString()
                 }
             ]);
@@ -46,6 +47,7 @@ export async function POST(request) {
                 data_key: trimmedKey,
                 data_value: trimmedValue,
                 data_note: trimmedNote,
+                userid: auth.user.id,
             }).eq("id", trimmedId);
 
             if (error) {
@@ -68,11 +70,17 @@ export async function GET(request) {
     try {
         const { searchParams } = new URL(request.url);
         const id = searchParams.get("id");
-        const { data, error } = await supabase
+        let query = supabase
             .from("data")
             .select("*")
             .eq("id", id || null)
             .order("created_at", { ascending: false });
+
+        if (id) {
+            query = query.eq("userid", auth.user.id);
+        }
+
+        const { data, error } = await query;
 
         if (error) {
             throw error;
@@ -92,10 +100,12 @@ export async function DELETE(request) {
     try {
         const { id } = await request.json();
         const trimmedId = id.trim();
+        const userId = auth.user.id;
         const { error } = await supabase
             .from("data")
             .delete()
-            .eq("id", trimmedId);
+            .eq("id", trimmedId)
+            .eq("userid", userId);
 
         if (error) {
             throw error;

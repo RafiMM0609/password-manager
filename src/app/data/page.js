@@ -68,7 +68,6 @@ export default function Simpanan() {
         .then(async (res) => {
             if (!res.ok) throw new Error('Gagal mengambil data');
             const result = await res.json();
-            console.log('Selected data:', result);
             Promise.all(result.map(async (item) => {
                 try {
                     if (item.data_key) {
