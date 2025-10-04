@@ -102,7 +102,8 @@ export default function Home() {
           </div>
 
           <button 
-            className="w-full bg-gradient-to-r from-gray-500 to-red-600 text-white py-3 px-4 rounded-lg font-medium hover:from-gray-600 hover:to-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+            className="w-full text-white py-3 px-4 rounded-lg font-medium hover:from-gray-600 hover:to-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" 
+            style={{ background: 'var(--background)' }}
             disabled={loading}
             type="submit"
           >

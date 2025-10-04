@@ -53,14 +53,25 @@ export function ListItem({ data, loading, error, deleteItem, onSelect }) {
         </div>
     );
 
+    function handleClientSearch(e){
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredData = data.filter(item => item.data_key.toLowerCase().includes(searchTerm));
+        setDecryptedData(filteredData);
+    }
+
     return (
         <div className="h-full overflow-y-auto p-4">
-            <search>
-                <input
-                    type="text"
-                    placeholder="Cari password..."
-                ></input>
-            </search>
+            <input type="search" placeholder="Cari..." 
+                className="w-full mb-2 p-2 border border-gray-300 rounded" 
+                style={{ 
+                    backgroundColor: 'var(--bg-secondary)', 
+                    color: '#ffff', 
+                    borderColor: 'var(--border-color)',
+                    cursor: 'text',
+                    caretColor: 'white'
+                }} 
+                onChange={(e) => handleClientSearch(e)} 
+            />
             {decryptedData.length === 0 ? (
                 <div className="text-center py-8">
                     <svg className="w-12 h-12 mx-auto mb-3" style={{ color: 'var(--text-secondary)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">

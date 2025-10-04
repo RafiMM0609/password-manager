@@ -52,7 +52,9 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-auto max-h-[90vh] overflow-hidden">
                 {/* Header */}
-                <div className="bg-gradient-to-r from-gray-500 to-red-600 px-6 py-4 text-white">
+                <div className="px-6 py-4 text-white"
+                    style={{ background: 'var(--background)' }}
+                    >
                     <div className="flex items-center justify-between">
                         <h2 className="text-xl font-semibold">
                             {existingData ? 'Edit Password' : 'Tambah Password Baru'}
@@ -151,7 +153,8 @@ export function AddDataNote({ onClose, onSuccess, existingData }) {
                             <button 
                                 type="submit"
                                 disabled={loading}
-                                className="flex-1 px-4 py-3 bg-gradient-to-r from-gray-500 to-red-600 text-white rounded-lg font-medium hover:from-gray-600 hover:to-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 px-4 py-3 text-white rounded-lg font-medium hover:from-gray-600 hover:to-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                style={{ background: 'var(--background)' }}
                             >
                                 {loading ? (
                                     <div className="flex items-center justify-center">
